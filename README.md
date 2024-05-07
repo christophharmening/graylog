@@ -1,7 +1,7 @@
 # graylog
 
 In this tutorial i used the tls encryption from rsyslog to send my logs over rsyslog to my graylog encrypted.
-Why this i cant setup an encryption direct in graylog.
+Why this?! I cant setup an encryption direct in graylog.
 
 ## Installation Debian 12 Stand 07.05.2024
 

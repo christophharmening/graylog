@@ -1,5 +1,7 @@
 # graylog
 
+In this tutorial i used the tls encryption from rsyslog to send my logs over rsyslog to my graylog encrypted.
+
 ## Installation Debian 12 Stand 07.05.2024
 
 **Required packages**
@@ -145,6 +147,14 @@ port="6514"
 )
 ```
 
+create second file for graylog
+```
+nano /etc/rsyslog.d/20-graylog.conf
+```
+```
+*.*@127.0.0.1:5148;RSYSLOG_SyslogProtocol23Format
+```
+
 Restart server
 ```
 systemctl restart rsyslog
@@ -188,5 +198,5 @@ Select Input "Syslog UDP" and "Launch Input"
 
 Config Input like this
 
-
+![ScreenShot](https://github.com/christophharmening/graylog/blob/main/GraylogRsyslogInput.png)
 

@@ -153,7 +153,11 @@ create second file for graylog
 nano /etc/rsyslog.d/20-graylog.conf
 ```
 ```
-*.*@127.0.0.1:5148;RSYSLOG_SyslogProtocol23Format
+*.=crit@127.0.0.1:5148;RSYSLOG_SyslogProtocol23Format
+*.=warn@127.0.0.1:5148;RSYSLOG_SyslogProtocol23Format
+*.=panic@127.0.0.1:5148;RSYSLOG_SyslogProtocol23Format
+*.=err@127.0.0.1:5148;RSYSLOG_SyslogProtocol23Format
+*.=alert@127.0.0.1:5148;RSYSLOG_SyslogProtocol23Format
 ```
 
 Restart server
@@ -177,6 +181,7 @@ Create Client config file
 nano /etc/rsyslog.d/60-remote-rsyslog.conf
 ```
 ```
+# Testconfig
 #@@SERVER:5147;RSYSLOG_SyslogProtocol23Format
 #*.*@SERVER:5147;RSYSLOG_SyslogProtocol23Format
 
@@ -187,7 +192,11 @@ global(DefaultNetstreamDriverCAFile="/etc/rsyslog.d/ca-rsyslog.pem")
 #action(type="omfwd" protocol="tcp" target="SERVER" port="6514" StreamDriver="gtls" StreamDriverMode="1" StreamDriverAuthMode="anon")
 
 # only crit messages
-*.=crit action(type="omfwd" protocol="tcp" target="SERVER" port="6514" StreamDriver="gtls" StreamDriverMode="1" StreamDriverAuthMode="anon")
+*.=crit action(type="omfwd" protocol="tcp" target="144.7.131.59" port="6514" StreamDriver="gtls" StreamDriverMode="1" StreamDriverAuthMode="anon")
+*.=err action(type="omfwd" protocol="tcp" target="144.7.131.59" port="6514" StreamDriver="gtls" StreamDriverMode="1" StreamDriverAuthMode="anon")
+*.=alert action(type="omfwd" protocol="tcp" target="144.7.131.59" port="6514" StreamDriver="gtls" StreamDriverMode="1" StreamDriverAuthMode="anon") 
+*.=panic action(type="omfwd" protocol="tcp" target="144.7.131.59" port="6514" StreamDriver="gtls" StreamDriverMode="1" StreamDriverAuthMode="anon")
+#*.=warn action(type="omfwd" protocol="tcp" target="144.7.131.59" port="6514" StreamDriver="gtls" StreamDriverMode="1" StreamDriverAuthMode="anon")
 ```
 
 Restart rsyslog

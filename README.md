@@ -177,12 +177,17 @@ Create Client config file
 nano /etc/rsyslog.d/60-remote-rsyslog.conf
 ```
 ```
+#@@SERVER:5147;RSYSLOG_SyslogProtocol23Format
+#*.*@SERVER:5147;RSYSLOG_SyslogProtocol23Format
+
 # certificate files - just CA for a client
 global(DefaultNetstreamDriverCAFile="/etc/rsyslog.d/ca-rsyslog.pem")
 
 # set up the action for all messages
-action(type="omfwd" protocol="tcp" target="SERVER" port="6514"
-       StreamDriver="gtls" StreamDriverMode="1" StreamDriverAuthMode="anon")
+#action(type="omfwd" protocol="tcp" target="SERVER" port="6514" StreamDriver="gtls" StreamDriverMode="1" StreamDriverAuthMode="anon")
+
+# only crit messages
+*.=crit action(type="omfwd" protocol="tcp" target="SERVER" port="6514" StreamDriver="gtls" StreamDriverMode="1" StreamDriverAuthMode="anon")
 ```
 
 Restart rsyslog

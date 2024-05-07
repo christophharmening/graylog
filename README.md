@@ -1,1 +1,3 @@
 # graylog
+
+## Installation
